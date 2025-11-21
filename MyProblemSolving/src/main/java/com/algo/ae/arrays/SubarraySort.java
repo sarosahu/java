@@ -16,10 +16,11 @@ import java.util.Arrays;
  * Sample Output: [3, 9]
  */
 public class SubarraySort {
+    // Time : ONLog(N), space : O(N)
     public static int[] subarraySort(int[] array) {
         int[] sortedArray = array.clone();
         Arrays.sort(sortedArray);
-        int left = 0, right = array.length - 1;
+        int left = -1, right = -1;
         for (int i = 0; i < array.length; ++i) {
             if (array[i] != sortedArray[i]) {
                 if (left == -1) {
@@ -76,5 +77,11 @@ public class SubarraySort {
         }
 
         return num > array[i + 1] || num < array[i - 1];
+    }
+
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19};
+        int[] output =  subarraySortE(arr1);
+        System.out.println(Arrays.toString(output));
     }
 }
