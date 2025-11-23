@@ -145,8 +145,8 @@ public class SubarraySumEqualsK {
         int sum = 0;
         Map<Integer, Integer> prefSumToCount = new HashMap<>();
         prefSumToCount.put(0, 1);
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
+        for (int num : nums) {
+            sum += num;
             if (prefSumToCount.containsKey(sum - k)) {
                 count += prefSumToCount.get(sum - k);
             }
