@@ -1,5 +1,7 @@
 package com.algo.ae.arrays;
 
+import java.util.Arrays;
+
 /**
  * Array Of Products
  *
@@ -20,7 +22,7 @@ package com.algo.ae.arrays;
 public class ArrayOfProducts {
 
     // Brute Force approach, time: O(N^2)
-    public int[] arrayOfProductsBF(int[] array) {
+    public static int[] arrayOfProductsBF(int[] array) {
         // Write your code here.
         int [] result = new int[array.length];
         for (int i = 0; i < array.length; ++i) {
@@ -29,13 +31,16 @@ public class ArrayOfProducts {
         return result;
     }
 
-    private void fillProducts(int [] result, int [] array, int index) {
+    private static void fillProducts(int [] result, int [] array, int index) {
         int product = 1;
         for (int i = 0; i < array.length; ++i) {
             if (i == index) {
                 continue;
             }
             product *= array[i];
+            if (product == 0) {
+                break;
+            }
         }
         result[index] = product;
     }
@@ -82,7 +87,12 @@ public class ArrayOfProducts {
         }
         return result;
     }
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        int [] arr = {5, 1, 4, 2};
+
+        System.out.println(Arrays.toString(arrayOfProductsBF(arr)));
+        System.out.println(Arrays.toString(arrayOfProducts(arr)));
+        System.out.println(Arrays.toString(arrayOfProducts2(arr)));
     }
 }
