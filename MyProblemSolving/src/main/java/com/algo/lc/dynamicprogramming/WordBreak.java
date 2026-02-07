@@ -7,12 +7,10 @@ public class WordBreak {
      * Time: O(N^3)
      */
     public static boolean wordBreak(String s, List<String> wordDict) {
-        Set<String> cache = new HashSet<>();
-        for (String str : wordDict) {
-            cache.add(str);
-        }
-        int[] table = new int[s.length()];
-        for (int i = 0; i < s.length(); ++i) {
+        Set<String> cache = new HashSet<>(wordDict);
+        int n = s.length();
+        int[] table = new int[n];
+        for (int i = 0; i < n; ++i) {
             String curr = s.substring(0, i + 1);
             if (cache.contains(curr)) {
                 table[i] = i + 1;
@@ -27,7 +25,23 @@ public class WordBreak {
                 }
             }
         }
-        if (table[s.length() - 1] > 0) {
+
+        if (table[n - 1] > 0) {
+            /**
+             * The below logic would also print the words those can be used
+             * to segment in order to convert into the original word (s)
+             *
+            List<String> strList = new ArrayList<>();
+            int idx = n - 1;
+            while (idx >= 0) {
+                strList.add(s.substring(idx - table[idx] + 1, idx + 1));
+                idx -= table[idx];
+            }
+            Collections.sort(strList);
+            for (String str : strList) {
+                System.out.println(str);
+            }
+             */
             return true;
         }
         return false;
@@ -49,14 +63,15 @@ public class WordBreak {
     public static boolean wordBreakBfs(String s, List<String> wordDict) {
         Set<String> cache = new HashSet<>(wordDict);
         Queue<Integer> queue = new LinkedList<>();
-        boolean [] seen = new boolean[s.length() + 1];
+        int n = s.length();
+        boolean [] seen = new boolean[n + 1];
         queue.offer(0);
         while (!queue.isEmpty()) {
             int currStart = queue.poll();
-            if (currStart == s.length()) {
+            if (currStart == n) {
                 return true;
             }
-            for (int end = currStart + 1; end <= s.length(); ++end) {
+            for (int end = currStart + 1; end <= n; ++end) {
                 if (seen[end]) {
                     continue;
                 }

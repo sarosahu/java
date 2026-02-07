@@ -23,6 +23,7 @@ public class LongestPalindromicSubstring {
             this.end = end;
         }
     }
+
     // Time : O(N^3), Space O(N)
     public static String longestPalindromicSubstring(String str) {
         String longest = "";
@@ -94,8 +95,7 @@ public class LongestPalindromicSubstring {
                 char startChar = str.charAt(start);
                 char endChar = str.charAt(end);
 
-                if (startChar == endChar && (end - start <= 2 ||
-                    palindromDp[start + 1][end - 1])) {
+                if (startChar == endChar && (end - start <= 2 || palindromDp[start + 1][end - 1])) {
                     palindromDp[start][end] = true;
 
                     if (end - start + 1 > maxVal) {
